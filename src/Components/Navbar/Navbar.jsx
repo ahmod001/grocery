@@ -76,26 +76,26 @@ const Links = ({ drawer, setIsOpenDrawer, isOpenDrawer }) => {
 
     return drawer ? (
         <List sx={{ mt: 1.5 }}>
-            {
-                pageLink.map(link => (
-                    <Link to={`/${link.linkName.toLowerCase()}`} key={link.id}>
-                        <ListItem sx={{ minWidth: '12rem' }} disablePadding>
-                            <ListItemButton
-                                onClick={() => setIsOpenDrawer(!isOpenDrawer)}
-                                sx={{ ":hover": { bgcolor: '#E0F3D7' } }}>
-                                <ListItemText sx={{ marginLeft: '0.4rem' }} primary={link.linkName} />
-                            </ListItemButton>
+            {pageLink.map(link => (
+                <Link to={`/${link.linkName.toLowerCase()}`} key={link.id}>
+                    <ListItem sx={{ minWidth: '12rem' }} disablePadding>
+                        <ListItemButton
+                            onClick={() => setIsOpenDrawer(!isOpenDrawer)}
+                            sx={{ ":hover": { bgcolor: '#E0F3D7' } }}>
+                            <ListItemText sx={{ marginLeft: '0.4rem' }} primary={link.linkName} />
+                        </ListItemButton>
 
-                        </ListItem>
-                    </Link>
-                ))}
+                    </ListItem>
+                </Link>
+            ))}
             {
                 componentsLink.map((link, i) => (
                     <ScrollToLink
                         key={i}
                         to={link.id}
                         smooth={true}
-                        offset={'-70'}
+                        spy={true}
+                        offset={-70}
                         duration={500}>
                         <ListItem sx={{ minWidth: '12rem' }} key={i} disablePadding>
                             <ListItemButton
@@ -121,16 +121,17 @@ const Links = ({ drawer, setIsOpenDrawer, isOpenDrawer }) => {
                 ))}
             {
                 componentsLink.map((link, i) => (
-                    <ScrollToLink
-                        key={i}
-                        to={link.id}
-                        smooth={true}
-                        offset={'-70'}
-                        duration={500}>
-                        <li className='sm:text-base text-sm'>
+                    <li key={i} className='sm:text-base text-sm cursor-pointer'>
+                        <ScrollToLink
+                            activeClass="active"
+                            to={link.id}
+                            smooth={true}
+                            spy={true}
+                            offset={-70}
+                            duration={500}>
                             {link.linkName}
-                        </li>
-                    </ScrollToLink>
+                        </ScrollToLink>
+                    </li>
                 ))
             }
         </ul >
