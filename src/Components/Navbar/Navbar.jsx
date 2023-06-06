@@ -152,10 +152,10 @@ const Navbar = (props) => {
     })
 
     return (
-        <>
+        <nav className='fixed'>
             <CssBaseline />
             <ElevationScroll {...props}>
-                <AppBar sx={{ bgcolor: isNavBarElevated ? '#EAF5E3' : 'transparent' }}>
+                <AppBar sx={{ bgcolor: isNavBarElevated ? 'white' : 'transparent' }}>
                     <Toolbar>
                         <Container sx={{ display: 'flex' }} >
 
@@ -231,7 +231,7 @@ const Navbar = (props) => {
                     <KeyboardArrowUpIcon />
                 </Fab>
             </ScrollTop>
-        </>
+        </nav>
     )
 };
 
