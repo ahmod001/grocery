@@ -96,7 +96,7 @@ const Links = ({ drawer, setIsOpenDrawer, isOpenDrawer }) => {
                         smooth={true}
                         spy={true}
                         offset={-70}
-                        duration={500}>
+                        duration={80}>
                         <ListItem sx={{ minWidth: '12rem' }} key={i} disablePadding>
                             <ListItemButton
                                 onClick={() => setIsOpenDrawer(!isOpenDrawer)}
@@ -145,6 +145,7 @@ const Navbar = (props) => {
     // Media Query
     const isExtraSmallScreen = useMediaQuery('(max-width: 664px)')
     const isSemiMediumScreen = useMediaQuery('(max-width: 900px)')
+    const isLargeScreen = useMediaQuery('(max-width:1280px)')
 
     // This function will change the  navBar bg-color when user scrolls
     window.addEventListener('scroll', () => {
@@ -152,12 +153,12 @@ const Navbar = (props) => {
     })
 
     return (
-        <nav className='fixed'>
+        <nav className='fixed z-50'>
             <CssBaseline />
             <ElevationScroll {...props}>
                 <AppBar sx={{ bgcolor: isNavBarElevated ? 'white' : 'transparent' }}>
                     <Toolbar>
-                        <Container sx={{ display: 'flex' }} >
+                        <Container disableGutters={isLargeScreen} sx={{ display: 'flex', px: isLargeScreen ? 0.5 : 0 }} >
 
                             {/* Open Drawer Btn */}
                             {isSemiMediumScreen &&
@@ -167,7 +168,7 @@ const Navbar = (props) => {
 
                                     onClick={() => setIsOpenDrawer(!isOpenDrawer)}
                                     edge="start"
-                                    sx={{ mr: 1.1 }}
+                                    sx={{ mr: 1 }}
                                 >
                                     <MenuIcon fontSize='inherit' />
                                 </IconButton>}
@@ -175,7 +176,9 @@ const Navbar = (props) => {
                             <div className='flex w-full justify-between items-center'>
                                 {/* Brand_icon */}
                                 <Link to={'/home'}>
-                                    <img className='sm:max-h-6 max-h-5 my-auto cursor-pointer' src={logo_black} alt="grocery" />
+                                    <img className='sm:max-h-6 max-h-5 my-auto cursor-pointer'
+                                        src={logo_black}
+                                        alt="grocery" />
                                 </Link>
 
                                 <div className='flex items-center space-x-8'>
@@ -227,7 +230,10 @@ const Navbar = (props) => {
 
             {/* Go_Back on the top btn */}
             <ScrollTop {...props}>
-                <Fab color='warning' size="small" aria-label="scroll back to top">
+                <Fab
+                    color='warning'
+                    size="small"
+                    aria-label="scroll back to top">
                     <KeyboardArrowUpIcon />
                 </Fab>
             </ScrollTop>
