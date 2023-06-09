@@ -6,7 +6,7 @@ import ful_kopi from '../../../assets/icons/ful_kopi_icon.png';
 
 const Hero = () => {
     // Media Query
-    const isSmallScreen = useMediaQuery('(max-width: 768px)');
+    const isMediumScreen = useMediaQuery('(max-width: 1024px)');
 
     return (
         <section style={{ backgroundImage: `url(${Hero_bg})`, backgroundSize: 'cover' }} className='pt-16 bg-green-300/10'>
@@ -14,7 +14,7 @@ const Hero = () => {
                 <div className='sm:grid sm:grid-cols-2 flex flex-col gap-x-5'>
                     {/* Text */}
                     <div className='col pt-3.5 flex items-center'>
-                      <div className='xl:space-y-7 lg:space-y-6 md:space-y-5 sm:space-y-4 space-y-5 w-11/12 sm:tracking-normal tracking-wide'>
+                      <div className='xl:space-y-7 lg:space-y-6 md:space-y-4 sm:space-y-4 space-y-5 w-11/12 sm:tracking-normal tracking-wide'>
                           {/* title */}
                           <h1 className='xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-3xl font-bold capitalize xl:tracking-wide'>
                             Make healthy life <br />
@@ -33,7 +33,7 @@ const Hero = () => {
                         {/* Shop_now Btn */}
                         <Button  sx={{textTransform: 'capitalize'}}
                         variant='contained'
-                        size={isSmallScreen?'medium':'large'}
+                        size={isMediumScreen ?'medium':'large'}
                         color='success'>
                             Shop Now 
                         </Button>
@@ -42,7 +42,7 @@ const Hero = () => {
 
                     {/* Hero Img */}
                     <div className='col'>
-                        <img className='xl:h-[33.5rem] lg:h-[28.5rem] md:h-[20rem] ms-auto h-[18rem]' src={hero_customer} alt="hero_customer" />
+                        <img className='xl:h-[30rem] lg:h-[26.5rem] md:h-[19rem] ms-auto h-[17rem]' src={hero_customer} alt="hero_customer" />
                     </div>
                 </div>
             </Container>
