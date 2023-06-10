@@ -27,7 +27,7 @@ const CustomersReview = () => {
         <Container>
             <section className='sm:space-y-10 space-y-8'>
                 {/* Title */}
-                <h1 className='pb-0 lg:text-4xl md:text-2xl text-xl font-semibold capitalize'>
+                <h1 className='pb-0 lg:text-3xl md:text-2xl text-xl font-semibold capitalize'>
                     What people say
                 </h1>
 
