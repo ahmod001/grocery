@@ -66,8 +66,8 @@ function ElevationScroll(props) {
 const Links = ({ drawer, setIsOpenDrawer, isOpenDrawer }) => {
     class LinkClass {
         constructor(id, linkName) {
-            this.id = id,
-                this.linkName = linkName
+            this.id = id;
+            this.linkName = linkName;
         }
     }
 

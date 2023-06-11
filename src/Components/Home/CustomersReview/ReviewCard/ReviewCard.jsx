@@ -7,7 +7,7 @@ const ReviewCard = ({ user }) => {
     const { name, picture } = user;
 
     return (
-        <div className='rounded-lg mx-auto cursor-pointer reviewCard xl:hover:scale-105 px-6 md:px-6 sm:px-4 py-4 md:space-y-3.5 sm:space-y-2.5 space-y-3.5 transition-all max-w-[23rem] sm:shadow-md shadow-sm duration-300'>
+        <div className='rounded-lg mx-auto cursor-pointer reviewCard px-6 md:px-6 sm:px-4 py-4 md:space-y-3.5 sm:space-y-2.5 space-y-3.5 transition-all max-w-[23rem] shadow-md shadow-sm duration-300'>
             <header className='flex items-center space-x-3'>
                 {/* Customer Img */}
                 <Avatar

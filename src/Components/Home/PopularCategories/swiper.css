@@ -1,0 +1,6 @@
+.swiper-button-next:after,
+.swiper-button-prev::after {
+  color: rgb(237, 108, 2);
+  font-size: 1.750rem;
+  font-weight: bold!important;
+}

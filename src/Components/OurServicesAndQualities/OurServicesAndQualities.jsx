@@ -17,7 +17,7 @@ const OurServicesAndQualities = ({ children }) => {
 
     return (
         <section id={!isOurQuality ? "services": ''}
-            style={isOurQuality ? { backgroundImage: `url(${ourQualitiesBg})`, backgroundRepeat: 'no-repeat' } : {}}>
+            style={isOurQuality ? { backgroundImage: `url(${ourQualitiesBg})`, backgroundRepeat: 'no-repeat' } :isService? {backgroundColor: 'white'}: {}}>
             <Container>
                 <div className='grid py-3.5 gap-x-3 gap-y-4 sm:grid-cols-2 grid-cols-1'>
                     {/* Img */}

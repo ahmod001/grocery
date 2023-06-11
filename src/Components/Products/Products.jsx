@@ -1,6 +1,6 @@
-import { Container } from '@mui/material';
+import { Container, Fade } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import ProductCard, { ProductCardSkeleton } from '../ProductCard/ProductCard';
+import ProductCard, { ProductCardSkeleton } from './ProductCard/ProductCard';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -22,29 +22,31 @@ const Products = () => {
     }, [])
 
     return (
-        <main className='min-h-screen space-y-5 pt-20 mb-9' style={{ backgroundColor: '#F8FFFB' }}>
-            <Container className='xl:space-y-10 sm:space-y-8 space-y-6'>
-                {/* Title */}
-                <h1 className='pb-0 lg:text-3xl text-2xl font-semibold capitalize'>
-                    All Products
-                </h1>
+        <main className='min-h-screen space-y-5 pt-20 mb-9'>
+            <Fade in={true}>
+                <Container className='xl:space-y-10 sm:space-y-8 space-y-6'>
+                    {/* Title */}
+                    <h1 className='pb-0 xl:text-3xl md:text-2xl text-xl xl:font-normal font-semibold capitalize'>
+                        All Products
+                    </h1>
 
-                {/* Product_cards*/}
-                <section className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 
+                    {/* Product_cards*/}
+                    <section className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 
                 lg:gap-6 gap-x-5 gap-y-5'>
-                    {
-                        !isLoading ?
-                            products.map(product => (
-                                <ProductCard
-                                    key={product.id}
-                                    product={product} />
-                            ))
-                            : Array.from({ length: 8 }).map((pd, i) => {
-                                return <ProductCardSkeleton key={i} />
-                            })
-                    }
-                </section>
-            </Container>
+                        {
+                            !isLoading ?
+                                products.map(product => (
+                                    <ProductCard
+                                        key={product.id}
+                                        product={product} />
+                                ))
+                                : Array.from({ length: 8 }).map((pd, i) => {
+                                    return <ProductCardSkeleton key={i} />
+                                })
+                        }
+                    </section>
+                </Container>
+            </Fade>
         </main>
     );
 };

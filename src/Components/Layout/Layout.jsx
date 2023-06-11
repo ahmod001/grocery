@@ -7,13 +7,11 @@ import Footer from '../Footer/Footer';
 const Layout = () => {
 
     return (
-        <Fade in={true}>
-            <main>
-                <Navbar />
-                <Outlet />
-                <Footer />
-            </main>
-        </Fade>
+        <>
+            <Navbar />
+            <Outlet />
+            <Footer />
+        </>
     );
 };
 

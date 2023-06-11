@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import ReviewCard, { ReviewCardSkeleton } from './ReviewCard/ReviewCard';
 import { Container } from '@mui/material';
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Pagination, Navigation, Autoplay } from "swiper";
+import SwiperCore, { Pagination, Autoplay, FreeMode } from "swiper";
 import "swiper/css";
-SwiperCore.use([Pagination, Navigation, Autoplay]);
+SwiperCore.use([Pagination, Autoplay]);
 
 const CustomersReview = () => {
     const [users, setUsers] = useState([]);
@@ -53,10 +53,10 @@ const CustomersReview = () => {
                             }
                         }
                     }
-                    navigation={true}
-                    autoplay={{ delay: 1000 }}
-                    speed={800}
-                    modules={[Pagination, Autoplay]}
+                    autoplay={{ delay: 1000, disableOnInteraction: false}}
+                    speed={700}
+                    modules={[Pagination, Autoplay, FreeMode]}
+                    freeMode={true}
                     className="mySwiper">
                     {
                         isLoaded ? users.map((user, i) => (

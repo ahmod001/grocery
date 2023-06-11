@@ -1,3 +1,4 @@
+import { Fade } from '@mui/material';
 import CustomersReview from './CustomersReview/CustomersReview';
 import DownloadOurApp from './DownloadOurApp/DownloadOurApp';
 import Hero from './Hero/Hero';
@@ -6,15 +7,20 @@ import OurServices from './OurServices/OurServices';
 import PopularCategories from './PopularCategories/PopularCategories';
 
 const Home = () => {
+  // Scrolling Bug Fixed
+  window.scroll({ top: 0 });
+  
   return (
-    <main className='min-h-screen space-y-5 mb-9'>
-      <Hero />
-      <PopularCategories />
-      <OurBestQualities />
-      <OurServices />
-      <CustomersReview/>
-      <DownloadOurApp />
-    </main>
+    <Fade in={true}>
+      <main className='min-h-screen space-y-5 mb-9'>
+        <Hero />
+        <PopularCategories />
+        <OurBestQualities />
+        <OurServices />
+        <CustomersReview />
+        <DownloadOurApp />
+      </main>
+    </Fade>
   )
 };
 
