@@ -9,9 +9,9 @@ import Fab from '@mui/material/Fab';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Fade from '@mui/material/Fade';
 import logo_black from '../../assets/logo_black.png';
-import { Button, Container, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, useMediaQuery } from '@mui/material';
+import { Button, Container, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Tooltip, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 // This function will add Go_back feature on the Navbar
 function ScrollTop(props) {
@@ -62,8 +62,11 @@ function ElevationScroll(props) {
     });
 }
 
-
 const Links = ({ drawer, setIsOpenDrawer, isOpenDrawer }) => {
+    const location = useLocation();
+    const { pathname } = location;
+
+    // This class will create Link Obj
     class LinkClass {
         constructor(id, linkName) {
             this.id = id;
@@ -91,13 +94,17 @@ const Links = ({ drawer, setIsOpenDrawer, isOpenDrawer }) => {
             {
                 componentsLink.map((link, i) => (
                     <ScrollToLink
-                        key={i}
                         to={link.id}
+                        key={i}
                         smooth={true}
                         spy={true}
                         offset={-70}
                         duration={80}>
-                        <ListItem sx={{ minWidth: '12rem' }} key={i} disablePadding>
+                        <ListItem
+                        disabled={link.id !== 'footer'&&pathname !== '/' && pathname !== '/home'}
+                            key={i}
+                            sx={{ minWidth: '12rem' }}
+                            disablePadding>
                             <ListItemButton
                                 onClick={() => setIsOpenDrawer(!isOpenDrawer)}
                                 sx={{ ":hover": { bgcolor: '#E0F3D7' } }}>
@@ -114,17 +121,17 @@ const Links = ({ drawer, setIsOpenDrawer, isOpenDrawer }) => {
             {
                 pageLink.map(li => (
                     <Link to={`/${li.linkName.toLowerCase()}`} key={li.id}>
-                        <li className='sm:text-base text-sm'>
+                        <li className='sm:text-base hover:text-gray-800 hover:scale-[0.99] text-sm'>
                             {li.linkName}
                         </li>
                     </Link>
                 ))}
             {
                 componentsLink.map((link, i) => (
-                    <li key={i} className='sm:text-base text-sm cursor-pointer'>
+                    <li key={i} className={`sm:text-base ${link.id !== 'footer'&&pathname !== '/' && pathname !== '/home'? 'hidden': 'block'} hover:text-gray-800 transition-all duration-500 hover:scale-[0.99] text-sm cursor-pointer`}>
                         <ScrollToLink
-                            activeClass="active"
                             to={link.id}
+                            activeClass="active"
                             smooth={true}
                             spy={true}
                             offset={-70}
@@ -147,7 +154,7 @@ const Navbar = (props) => {
     const isSemiMediumScreen = useMediaQuery('(max-width: 900px)')
     const isLargeScreen = useMediaQuery('(max-width:1280px)')
 
-    // This function will change the  navBar bg-color when user scrolls
+    // This function will change the navBar bg-color when user scrolls
     window.addEventListener('scroll', () => {
         setIsNavbarElevated(window.scrollY > 0)
     })
@@ -156,9 +163,11 @@ const Navbar = (props) => {
         <nav className='fixed z-50'>
             <CssBaseline />
             <ElevationScroll {...props}>
-                <AppBar sx={{ bgcolor: isNavBarElevated ? 'white' : 'transparent' }}>
+                <AppBar sx={{ bgcolor: isNavBarElevated ? 'white' : 'transparent', transition: 'all 150ms ease-in-out' }}>
                     <Toolbar>
-                        <Container disableGutters={isLargeScreen} sx={{ display: 'flex', px: isLargeScreen ? 0.5 : 0 }} >
+                        <Container
+                            disableGutters={isLargeScreen}
+                            sx={{ display: 'flex', px: isLargeScreen ? 0.5 : 0 }} >
 
                             {/* Open Drawer Btn */}
                             {isSemiMediumScreen &&

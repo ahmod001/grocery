@@ -53,7 +53,7 @@ const CustomersReview = () => {
                             }
                         }
                     }
-                    autoplay={{ delay: 1000, disableOnInteraction: false}}
+                    autoplay={{ delay: 1000, disableOnInteraction: false }}
                     speed={700}
                     modules={[Pagination, Autoplay, FreeMode]}
                     freeMode={true}

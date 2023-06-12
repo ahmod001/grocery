@@ -1,22 +1,36 @@
 import { Container, Fade } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ProductCard, { ProductCardSkeleton } from './ProductCard/ProductCard';
+import { useParams } from 'react-router-dom';
 
-const Products = () => {
+const Products = ({ categoryProducts }) => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const { categoryName } = useParams();
+
+    // Scrolling Bug Fixed
+    window.scroll({ top: 0 });
 
     // Get Products 
     useEffect(() => {
         const getData = async function () {
+            const allProductsUrl = 'https://api.npoint.io/bc3d1b1bc1a0fde36701';
+            const categoryProductsUrl = `https://api.npoint.io/bc3d1b1bc1a0fde36701/${categoryName === 'meat' ? 0
+                : categoryName === 'vegetables' ? 1
+                    : categoryName === 'fruits' ? 2
+                        : categoryName === 'dairy' ? 3
+                            : categoryName === 'grains' ? 4
+                                : 2}`
+
             try {
-                const res = await fetch('https://dummyjson.com/products/category/groceries')
+                const res = await fetch(categoryName ? categoryProductsUrl : allProductsUrl)
                 const data = await res.json();
-                setProducts(data.products)
+                setProducts(categoryName ? data.items
+                    : data[0].items.concat(data[1].items, data[2].items, data[3].items, data[4].items))
                 setIsLoading(!isLoading)
 
             } catch (error) {
-                console.error('products_fetch_error', error);
+                console.error('products_error', error);
             }
         }();
     }, [])
@@ -26,8 +40,8 @@ const Products = () => {
             <Fade in={true}>
                 <Container className='xl:space-y-10 sm:space-y-8 space-y-6'>
                     {/* Title */}
-                    <h1 className='pb-0 xl:text-3xl md:text-2xl text-xl xl:font-normal font-semibold capitalize'>
-                        All Products
+                    <h1 className='pb-0 xl:text-3xl md:text-2xl text-xl font-normal  capitalize'>
+                        {categoryName ? categoryName : 'All Products'}
                     </h1>
 
                     {/* Product_cards*/}

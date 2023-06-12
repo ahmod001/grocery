@@ -41,7 +41,7 @@ const OurServicesList = () => {
                 new Service(3, 'Competitive Price', price)
             ].map((service) => (
                 <li key={service.id}
-                    className='xl:space-x-3.5 md:cursor-pointer space-x-3 flex p-0 xl:ps-3.5 md:ps-3 ps-0 rounded-md items-center xl:h-16 lg:h-14 h-12 md:hover:shadow-md lg:hover:scale-105 transition-all md:duration-400 duration-200'>
+                    className='xl:space-x-3.5 space-x-3 flex p-0 xl:ps-3.5 md:ps-3 ps-0 rounded-md items-center xl:h-16 lg:h-14 h-12 md:hover:shadow-md  transition-all md:duration-400 duration-200'>
                     <img
                         className='xl:h-9 lg:h-8 h-7 my-auto'
                         src={service.icon}
