@@ -1,6 +1,6 @@
 import { Button, Container, useMediaQuery } from '@mui/material';
 import { ArrowForward } from "@mui/icons-material";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide} from "swiper/react";
 import { FreeMode, Navigation, Pagination } from "swiper";
 import meat from "../../../assets/categories/meat.png";
 import vegetables from "../../../assets/categories/vagetable.png";
@@ -13,6 +13,8 @@ import CategoryCard from '../../CategoryCard/CategoryCard';
 import { useRef } from 'react';
 import './swiper.css'
 import { useNavigate } from 'react-router-dom';
+
+
 const PopularCategories = () => {
     // Media Query
     const isExtraSmallScreen = useMediaQuery('(max-width: 664px)')

@@ -9,5 +9,6 @@
 body {
   margin: 0;
   background-color: #F8FFFB !important;
+  overflow-x: hidden;
   font-family: 'Plus Jakarta Sans', sans-serif !important;
 }

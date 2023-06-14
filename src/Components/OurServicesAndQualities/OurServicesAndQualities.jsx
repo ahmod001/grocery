@@ -25,7 +25,7 @@ const OurServicesAndQualities = ({ children }) => {
 
                     {/* texts */}
                     <div className={`flex md:max-w-none ${!isOurQuality && 'sm:order-first order-none'} max-w-[32rem] items-center`}>
-                        <div className={isDownloadApp? 'lg:space-y-10 sm:space-y-7 space-y-8' :'lg:space-y-6  space-y-3.5'}>
+                        <div className={isDownloadApp? 'lg:space-y-10 sm:space-y-7 space-y-8' :isOurQuality?'lg:space-y-8 space-y-4':'lg:space-y-6  space-y-3.5'}>
                             <div className={`${isDownloadApp? 'md:space-y-6 space-y-4':'md:space-y-3 sm:space-y-1.5  space-y-2.5'} w-11/12`}>
                                 {/* title */}
                                 <h1 className='pb-0 lg:text-3xl md:text-2xl text-xl font-bold capitalize xl:tracking-wide'>

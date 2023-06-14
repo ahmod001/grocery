@@ -21,7 +21,6 @@ const Products = ({ categoryProducts }) => {
                         : categoryName === 'dairy' ? 3
                             : categoryName === 'grains' ? 4
                                 : 2}`
-
             try {
                 const res = await fetch(categoryName ? categoryProductsUrl : allProductsUrl)
                 const data = await res.json();
@@ -30,7 +29,7 @@ const Products = ({ categoryProducts }) => {
                 setIsLoading(!isLoading)
 
             } catch (error) {
-                console.error('products_error', error);
+                console.error('allProducts', error);
             }
         }();
     }, [])

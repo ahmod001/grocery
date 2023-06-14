@@ -101,7 +101,7 @@ const Links = ({ drawer, setIsOpenDrawer, isOpenDrawer }) => {
                         offset={-70}
                         duration={80}>
                         <ListItem
-                        disabled={link.id !== 'footer'&&pathname !== '/' && pathname !== '/home'}
+                            disabled={link.id !== 'footer' && pathname !== '/' && pathname !== '/home'}
                             key={i}
                             sx={{ minWidth: '12rem' }}
                             disablePadding>
@@ -128,7 +128,7 @@ const Links = ({ drawer, setIsOpenDrawer, isOpenDrawer }) => {
                 ))}
             {
                 componentsLink.map((link, i) => (
-                    <li key={i} className={`sm:text-base ${link.id !== 'footer'&&pathname !== '/' && pathname !== '/home'? 'hidden': 'block'} hover:text-gray-800 transition-all duration-500 hover:scale-[0.99] text-sm cursor-pointer`}>
+                    <li key={i} className={`sm:text-base ${link.id !== 'footer' && pathname !== '/' && pathname !== '/home' ? 'hidden' : 'block'} hover:text-gray-800 transition-all duration-500 hover:scale-[0.99] text-sm cursor-pointer`}>
                         <ScrollToLink
                             to={link.id}
                             activeClass="active"
@@ -158,6 +158,8 @@ const Navbar = (props) => {
     window.addEventListener('scroll', () => {
         setIsNavbarElevated(window.scrollY > 0)
     })
+
+    const navigate = useNavigate();
 
     return (
         <nav className='fixed z-50'>
@@ -212,13 +214,14 @@ const Navbar = (props) => {
                                     {/* Authentication Btn */}
                                     {
                                         // Log in
-                                        0 < 1 ? <Button
-                                            size={isExtraSmallScreen ? 'small' : 'medium'}
-                                            sx={{ textTransform: 'capitalize' }}
-                                            color='success'
-                                            variant='contained'>
-                                            Log in
-                                        </Button>
+                                        0 < 1 ?
+                                            <Button onClick={() => navigate('/login')}
+                                                size={isExtraSmallScreen ? 'small' : 'medium'}
+                                                sx={{ textTransform: 'capitalize' }}
+                                                color='success'
+                                                variant='contained'>
+                                                Log in
+                                            </Button>
 
                                             // Log out
                                             : <Button
