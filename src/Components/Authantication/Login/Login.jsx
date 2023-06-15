@@ -1,8 +1,10 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { Button, Container, Fade, IconButton, InputAdornment, TextField } from '@mui/material';
-import { useState } from 'react';
+import { Alert, Button, Collapse, Container, Fade, IconButton, InputAdornment, TextField } from '@mui/material';
+import { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import animation from '../../../assets/animations/loginAnimation.gif';
+import { groceryContext } from '../../Layout/Layout';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,19 +14,28 @@ const Login = () => {
     // Scrolling Bug Fixed
     window.scroll({ top: 0 });
 
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { from } = location.state || { from: { pathname: '/' } }
+
+    const { userLoggedInState } = useContext(groceryContext);
     // Login handler
     const onSubmit = data => {
         const defaultUser = {
             email: 'user@gmail.com',
             password: 'User1234'
         }
+        const [isUserLoggedIn, setIsUserLoggedIn] = userLoggedInState;
+
         if (defaultUser.email !== data.email) {
-            setLogInError("You entered wrong email")
+            setLogInError("Invalid email")
         } else if (defaultUser.password !== data.password) {
-            setLogInError('You entered the password')
+            setLogInError('Invalid password')
         } else {
             setLogInError('')
             sessionStorage.setItem('userLoggedIn', JSON.stringify(true))
+            setIsUserLoggedIn(true)
+            navigate(from)
         }
     };
 
@@ -103,6 +114,10 @@ const Login = () => {
                                             }}
                                         />
 
+                                        {/* Display the alert only if there is a login error */}
+                                        {logInError &&
+                                            <></>
+                                        }
                                         {/* Submit-btn */}
                                         <Button
                                             sx={{ textTransform: 'capitalize' }}

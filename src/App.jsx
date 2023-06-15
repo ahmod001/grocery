@@ -6,6 +6,8 @@ import AllCategories from "./Components/AllCategories/AllCategories";
 import PageNotFound from "./Components/PageNotFound/PageNotFound";
 import About from "./Components/About/About";
 import Login from "./Components/Authantication/Login/Login";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import Cart from "./Components/Cart/Cart";
 
 function App() {
   return (
@@ -19,8 +21,12 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/categories/:categoryName" element={
             <Products categoryProducts={true} />} />
-            <Route path="/login" element={<Login/>} />
-          <Route path="/*" element={<PageNotFound/>} />
+          <Route path="/login" element={<Login />} />
+          {/* Protected Route */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/cart" element={<Cart />} />
+          </Route>
+          <Route path="/*" element={<PageNotFound />} />
         </Route>
       </Routes>
     </Router>

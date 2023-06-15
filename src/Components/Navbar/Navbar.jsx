@@ -12,6 +12,8 @@ import logo_black from '../../assets/logo_black.png';
 import { Button, Container, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Tooltip, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { groceryContext } from '../Layout/Layout';
+import { ShoppingCartRounded } from '@mui/icons-material';
 
 // This function will add Go_back feature on the Navbar
 function ScrollTop(props) {
@@ -144,6 +146,7 @@ const Links = ({ drawer, setIsOpenDrawer, isOpenDrawer }) => {
         </ul >
         )
 }
+export const userLoggedIn = JSON.parse(sessionStorage.getItem('userLoggedIn'));
 
 const Navbar = (props) => {
     const [isNavBarElevated, setIsNavbarElevated] = React.useState(false)
@@ -160,6 +163,14 @@ const Navbar = (props) => {
     })
 
     const navigate = useNavigate();
+    const { userLoggedInState } = React.useContext(groceryContext);
+    const [isUserLoggedIn, setIsUserLoggedIn] = userLoggedInState;
+
+    // Log out button handler 
+    const handleLogOut = () => {
+        setIsUserLoggedIn(false)
+        sessionStorage.setItem('userLoggedIn', JSON.stringify(false))
+    }
 
     return (
         <nav className='fixed z-50'>
@@ -210,11 +221,21 @@ const Navbar = (props) => {
                                             setIsOpenDrawer={setIsOpenDrawer}
                                             isOpenDrawer={isOpenDrawer} />
                                     }
+                                    {/* Go to cart btn */}
+                                    <Tooltip title='Cart'>
+                                        <span>
+                                            <IconButton
+                                                onClick={() => navigate('/cart')}
+                                                // disabled
+                                                sx={{ textTransform: 'capitalize' }}
+                                                color='warning'>
+                                                <ShoppingCartRounded fontSize='inherit' />
+                                            </IconButton>
+                                        </span>
+                                    </Tooltip>
 
-                                    {/* Authentication Btn */}
-                                    {
-                                        // Log in
-                                        0 < 1 ?
+                                    {// Log in Btn
+                                        !isUserLoggedIn ?
                                             <Button onClick={() => navigate('/login')}
                                                 size={isExtraSmallScreen ? 'small' : 'medium'}
                                                 sx={{ textTransform: 'capitalize' }}
@@ -223,13 +244,14 @@ const Navbar = (props) => {
                                                 Log in
                                             </Button>
 
-                                            // Log out
+                                            // Log out Btn
                                             : <Button
                                                 size={isExtraSmallScreen ? 'small' : 'medium'}
+                                                onClick={handleLogOut}
                                                 sx={{ textTransform: 'capitalize' }}
                                                 color='success'
                                                 variant='contained'>
-                                                Log in
+                                                Log out
                                             </Button>
                                     }
                                 </div>
