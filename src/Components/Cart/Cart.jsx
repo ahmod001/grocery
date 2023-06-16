@@ -12,13 +12,13 @@ const Cart = () => {
     const navigate = useNavigate();
 
     return (
-        <section className='h-screen pt-16'>
+        <section className='min-h-screen pt-20 pb-10'>
 
             {
                 !isCartEmpty ?
                     // Main Layout
-                    <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                        <section className="grid gap-8 w-full lg:grid-cols-3 md:grid-cols-2 ">
+                    <Container sx={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
+                        <section className="grid gap-x-3 gap-y-5 w-full xl:grid-cols-3 lg:grid-cols-2 ">
                             <CartItems />
                             <OrderSummary />
                         </section>

@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 
 const OrderSummary = () => {
     return (
-        <div className='flex justify-center'>
+        <div className='flex justify-center md:pt-16 '>
             <div className='sm:space-y-5 w-full max-w-[25rem] space-y-4'>
             {/* Title */}
             <h3 className='sm:text-xl text-lg sm:font-semibold font-bold tracking-wide'>Order Summary</h3>
