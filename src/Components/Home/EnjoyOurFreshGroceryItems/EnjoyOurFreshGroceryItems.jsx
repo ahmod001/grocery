@@ -1,13 +1,21 @@
 import { Button, Container, useMediaQuery } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ProductCard, { ProductCardSkeleton } from '../../Products/ProductCard/ProductCard';
 import { useNavigate } from 'react-router-dom';
+import { products } from '../../../store/products';
 
 const EnjoyOurFreshGroceryItems = () => {
     const [items, setItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+
+    // Offline Mode
+    useMemo(() => {
+        setIsLoading(false)
+        setItems(products[selectedCategory].items.slice(0, 3))
+    }, [selectedCategory])
+
     // MediaQuery
     const isExtraSmallScreen = useMediaQuery('(max-width: 640px)');
 
@@ -22,7 +30,7 @@ const EnjoyOurFreshGroceryItems = () => {
                 setIsLoading(false)
 
             } catch (error) {
-                console.error('EnjoyFreshItems', error);
+                throw new Error('EnjoyFreshItems Fetch Failed', error)
             }
         }();
     }, [selectedCategory])
@@ -66,6 +74,7 @@ const EnjoyOurFreshGroceryItems = () => {
     );
 };
 
+// Grocery Items Toggler
 const ItemsToggler = ({ alignment, setAlignment }) => {
     // MediaQuery
     const isExtraSmallScreen = useMediaQuery('(max-width: 640px)')
@@ -79,7 +88,7 @@ const ItemsToggler = ({ alignment, setAlignment }) => {
                 { id: 2, name: 'Fruits' },
             ].map(category => (
                 <Button
-                    sx={{ textTransform: 'capitalize',  transition:'all 150ms ease-in-out' }}
+                    sx={{ textTransform: 'capitalize', transition: 'all 150ms ease-in-out' }}
                     size={isExtraSmallScreen ? 'small' : isLargeScreen ? 'large' : 'medium'}
                     color='success'
                     variant={alignment === category.id ? 'contained' : 'text'}

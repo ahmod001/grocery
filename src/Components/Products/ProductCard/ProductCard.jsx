@@ -1,11 +1,41 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Fade, Rating, Skeleton, useMediaQuery } from '@mui/material';
 import { Star } from '@mui/icons-material';
+import { useContext, useState } from 'react';
+import { groceryContext } from '../../Layout/Layout';
+import { handleSessionStorage } from '../../../utils/utils';
 
 const ProductCard = ({ product }) => {
-    const { img, name, price, reviews, reviewCount } = product;
+    const { img, name, price, reviews, reviewCount, quantity, unit } = product;
 
     // Media Query
     const isMediumScreen = useMediaQuery('(min-width: 768px) and (max-width: 1024px)');
+
+    const { cartItemsState } = useContext(groceryContext);
+    const [cartItems, setCartItems] = cartItemsState;
+
+    //Handle Add To Cart
+    const handleAddToCartBtn = () => {
+        let targetedProduct = product;
+        let latestCartItems = cartItems;
+
+        const isTargetedProductAlreadyExist = cartItems.find(item => item.id === product.id)
+        if (isTargetedProductAlreadyExist) {
+            targetedProduct = {
+                ...isTargetedProductAlreadyExist,
+                quantity: isTargetedProductAlreadyExist.quantity + 1,
+                total: ((isTargetedProductAlreadyExist.quantity + 1) * isTargetedProductAlreadyExist.price).toFixed(2)
+            }
+            latestCartItems = cartItems.filter(item => item.id !== targetedProduct.id)
+        }
+        setCartItems([
+            targetedProduct,
+            ...latestCartItems
+        ])
+        handleSessionStorage('set', 'cartItems', [
+            targetedProduct,
+            ...latestCartItems
+        ])
+    }
 
     return (
         <div>
@@ -30,11 +60,11 @@ const ProductCard = ({ product }) => {
                                 <div className='flex justify-center space-x-5'>
                                     {/* Amount */}
                                     <span className='block text-sm md:text-xs lg:text-sm'>
-                                        ± 1000 gm
+                                        ± {quantity} {unit}
                                     </span>
                                     {/* Price */}
                                     <span className='block text-sm md:text-xs lg:text-sm'>
-                                        ${price} USD
+                                        $ {price} USD
                                     </span>
                                 </div>
 
@@ -62,6 +92,7 @@ const ProductCard = ({ product }) => {
                             <Button
                                 sx={{ textTransform: 'capitalize', marginX: 'auto', ":hover": { bgcolor: '#2e7d32', color: 'white', transition: 'all 235ms ease-in-out' } }}
                                 fullWidth
+                                onClick={handleAddToCartBtn}
                                 size={isMediumScreen ? 'small' : 'medium'}
                                 variant='outlined'
                                 color='success'>

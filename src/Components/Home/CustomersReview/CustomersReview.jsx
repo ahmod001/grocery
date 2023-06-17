@@ -19,7 +19,10 @@ const CustomersReview = () => {
                 setUsers(user.results)
                 setIsLoaded(!isLoaded)
             }
-            catch (error) { console.error('Error', error) }
+            catch (error) {
+                throw new Error('Customers_Review Fetch Failed', error)
+            }
+
         }();
     }, [])
 

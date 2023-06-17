@@ -1,26 +1,40 @@
 import { Button, Fade, IconButton, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import boi from '../../../assets/premium_qualityMan.png'
 import { Add, Remove } from "@mui/icons-material";
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { groceryContext } from '../../Layout/Layout';
+import { handleSessionStorage } from '../../../utils/utils';
 
-const CartItemCard = () => {
+const CartItemCard = ({ item }) => {
+    const { id, name, img, quantity, unit, price, total } = item;
+
+    // Get Cart Items from Context
+    const { cartItemsState } = useContext(groceryContext);
+    const [cartItems, setCartItems] = cartItemsState;
+
+    // Remove Item Handler
+    const handleRemoveItem = () => {
+        const trimmedCart = cartItems.filter(item => item.id !== id)
+        setCartItems(trimmedCart)
+        handleSessionStorage('set', 'cartItems', trimmedCart)
+    }
+
     return (
         <Fade in={true}>
-            <div className='grid max-w-[40rem] mx-auto py-2.5 px-3 lg:grid-cols-5 grid-cols-5 lg:gap-x-2.5 gap-x-2 rounded-md w-full bg-gray-100/80'>
+            <div className='grid max-w-[40rem] py-2.5 px-3 xl:grid-cols-5 sm:grid-cols-6 grid-cols-7 lg:gap-x-2.5 gap-x-2 rounded-md w-full bg-white hover:shadow-sm'>
                 {/*Img */}
                 <div className='col flex items-center justify-center'>
                     <img
-                        src={boi}
-                        className='lg:h-20 h-14'
-                        alt={''} />
+                        src={img}
+                        className='lg:h-16 h-10'
+                        alt={name} />
                 </div>
 
                 <div className='col-span-2 overflow-hidden pt-2'>
                     <div className=' overflow-hidden lg:space-y-2 space-y-0.5'>
                         {/* Name */}
-                        <h4 className='font-semibold lg:max-h-none max-h-10 overflow-hidden lg:text-gray-700 text-sm'>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing.
+                        <h4 className='font-semibold lg:max-h-none max-h-10 overflow-hidden lg:text-gray-700 sm:text-sm text-xs'>
+                            {name}
                         </h4>
 
                         {/* Description */}
@@ -30,11 +44,12 @@ const CartItemCard = () => {
                     </div>
                 </div>
 
-                <div className='flex justify-center items-center'>
-                    <div className='lg:space-y-1 space-y-0.5'>
+                <div className='flex sm:col-span-1 col-span-2 justify-center items-center'>
+                    <div className='lg:space-y-1 md:space-y-0 sm:space-y-0.5'>
                         {/*Total Price */}
-                        <h3 className='font-semibold sm:text-base text-sm text-green-600'>
-                            $ 120</h3>
+                        <h3 className='font-semibold whitespace-nowrap sm:text-base text-sm text-green-600'>
+                            $ {total}
+                        </h3>
 
                         {/* Remove-Item btn */}
                         <div className='text-center'>
@@ -43,6 +58,7 @@ const CartItemCard = () => {
                                 title='remove'
                                 placement='left'>
                                 <IconButton
+                                    onClick={handleRemoveItem}
                                     sx={{ textTransform: 'capitalize', opacity: 0.7 }}
                                     color='inherit'
                                     size='small'>
@@ -55,8 +71,9 @@ const CartItemCard = () => {
                 </div>
 
                 {/* Item Quantity Control */}
-                <div className='flex items-center justify-center'>
-                    <QuantityController />
+                <div className='flex items-center justify-center xl:col-span-1 col-span-2'>
+                    <QuantityController
+                        item={item} />
                 </div>
             </div>
         </Fade>
@@ -64,24 +81,47 @@ const CartItemCard = () => {
 };
 
 // Quantity Controller
-const QuantityController = () => {
-    const [quantity, setQuantity] = useState(1);
+const QuantityController = ({ item }) => {
+    const { unit, quantity, price, id } = item;
+    const [productQuantity, setProductQuantity] = useState(quantity);
+
+    // Get Cart Items from Context
+    const { cartItemsState } = useContext(groceryContext);
+    const [cartItems, setCartItems] = cartItemsState;
 
     // Event Handlers
     const handleReduce = () => {
-        quantity > 1 && setQuantity(quantity - 1)
+        productQuantity > 1 && setProductQuantity(productQuantity - 1)
     }
     const handleIncrement = () => {
-        setQuantity(quantity + 1)
+        setProductQuantity(productQuantity + 1)
     }
 
+    // Update Cart
+    useEffect(() => {
+        const updatedCart = cartItems.map(item => {
+            if (item.id === id) {
+                return {
+                    ...item,
+                    quantity: productQuantity,
+                    total: (productQuantity * price).toFixed(2)
+                }
+
+            } else {
+                return item
+            }
+        })
+        setCartItems(updatedCart)
+        handleSessionStorage('set', 'cartItems', updatedCart)
+    }, [productQuantity])
+
     return (
-        <div className={'flex items-center justify-center my-auto lg:space-x-2.5 space-x-1'}>
+        <div className={'flex items-center justify-center my-auto lg:space-x-2.5 sm:space-x-2 space-x-1.5'}>
 
             {/* Reduce Quantity */}
             <IconButton
                 size={'small'}
-                disabled={quantity < 2}
+                disabled={productQuantity < 2}
                 onClick={handleReduce}
             >
                 <Remove fontSize='inherit' />
@@ -89,7 +129,7 @@ const QuantityController = () => {
 
             {/* Current Quantity*/}
             <h1 className={'my-auto lg:text-xl lg:font-medium font-semibold text-gray-700 whitespace-nowrap'}>
-                {quantity}<span className='lg:text-sm text-xs'> kg</span>
+                {productQuantity}<span className='lg:text-sm text-xs'> {unit}</span>
             </h1>
 
             {/* Increase Quantity */}

@@ -27,9 +27,9 @@ const Products = ({ categoryProducts }) => {
                 setProducts(categoryName ? data.items
                     : data[0].items.concat(data[1].items, data[2].items, data[3].items, data[4].items))
                 setIsLoading(!isLoading)
-
-            } catch (error) {
-                console.error('allProducts', error);
+            }
+            catch (error) {
+                throw new Error('Products Fetch Failed', error)
             }
         }();
     }, [])
