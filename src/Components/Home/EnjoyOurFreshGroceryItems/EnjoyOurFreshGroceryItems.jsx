@@ -37,9 +37,9 @@ const EnjoyOurFreshGroceryItems = () => {
 
     return (
         <Container >
-            <div className='space-y-6 sm:space-y-7 xl:space-y-9'>
+            <div className='space-y-7 xl:space-y-8'>
                 {/* Title */}
-                <h1 className='text-center pb-0 lg:text-3xl md:text-2xl text-xl font-bold capitalize xl:tracking-wide'>
+                <h1 className='text-center pb-0 md:text-2xl text-xl font-semibold capitalize tracking-wide'>
                     Enjoy Our Healthy And Fresh <br />
                     Grocery Items
                 </h1>

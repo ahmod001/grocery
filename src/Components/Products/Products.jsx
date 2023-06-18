@@ -39,7 +39,7 @@ const Products = ({ categoryProducts }) => {
             <Fade in={true}>
                 <Container className='xl:space-y-10 sm:space-y-8 space-y-6'>
                     {/* Title */}
-                    <h1 className='pb-0 xl:text-3xl md:text-2xl text-xl font-normal  capitalize'>
+                    <h1 className='pb-0 md:text-2xl text-xl font-semibold text-gray-700 capitalize'>
                         {categoryName ? categoryName : 'All Products'}
                     </h1>
 

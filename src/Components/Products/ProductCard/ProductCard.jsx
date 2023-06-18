@@ -3,13 +3,16 @@ import { Star } from '@mui/icons-material';
 import { useContext, useState } from 'react';
 import { groceryContext } from '../../Layout/Layout';
 import { handleSessionStorage } from '../../../utils/utils';
+import SuccessAlert from '../../SuccessAlert/SuccessAlert';
 
 const ProductCard = ({ product }) => {
     const { img, name, price, reviews, reviewCount, quantity, unit } = product;
 
     // Media Query
     const isMediumScreen = useMediaQuery('(min-width: 768px) and (max-width: 1024px)');
+    const isSmallScreen = useMediaQuery('(max-width:768px)');
 
+    const [openAlert, setOpenAlert] = useState(false)
     const { cartItemsState } = useContext(groceryContext);
     const [cartItems, setCartItems] = cartItemsState;
 
@@ -35,25 +38,31 @@ const ProductCard = ({ product }) => {
             targetedProduct,
             ...latestCartItems
         ])
+
+        setOpenAlert(!openAlert)
     }
 
     return (
         <div>
+            <SuccessAlert
+                state={[openAlert, setOpenAlert]}
+                massage={'Item added successfully'} />
+
             <Fade in={true}>
-                <Card sx={{ maxWidth: 308, mx: 'auto', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)', backgroundColor: 'white' }}>
+                <Card sx={{ maxWidth: isSmallScreen ? 275 : 295, mx: 'auto', boxShadow: '0 2px 4px -1px rgb(0 0 0 / 0.1)', backgroundColor: 'white' }}>
 
                     {/* Product_img */}
                     {/* Note: Transparent or solid white background img required */}
-                    <div className='h-40 w-full bg-white flex items-center justify-center'>
-                        <img className='max-h-32'
+                    <div className='md:h-36 py-3 w-full bg-white flex items-center justify-center'>
+                        <img className='md:max-h-28 max-h-24'
                             loading='lazy'
                             src={img}
                             alt={name} />
                     </div>
-                    <div className='px-1.5 pb-2'>
-                        <CardContent className='space-y-2 '>
+                    <div className='p-1.5'>
+                        <CardContent className='md:space-y-2 space-y-1.5 '>
                             {/* title */}
-                            <h3 className='md:text-xl lg:text-2xl text-2xl text-gray-700 font-semibold text-center capitalize'>
+                            <h3 className='md:text-xl lg:text-2xl text-xl text-gray-700 font-semibold text-center capitalize'>
                                 {name}
                             </h3>
                             <div className='md:space-y-1.5 space-y-2 lg:space-y-2'>

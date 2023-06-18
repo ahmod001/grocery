@@ -33,7 +33,7 @@ const Login = () => {
             setLogInError('Invalid password')
         } else {
             setLogInError('')
-            sessionStorage.setItem('userLoggedIn', JSON.stringify(true))
+            sessionStorage.setItem('grocery_userLoggedIn', JSON.stringify(true))
             setIsUserLoggedIn(true)
             navigate(from)
         }
@@ -63,7 +63,6 @@ const Login = () => {
                                         className='text-center lg:space-y-7 md:space-y-6 space-y-7' action="login" method="post">
                                         {/* Email */}
                                         <TextField
-                                            error={errors.email ? true : false}
                                             {...register('email', {
                                                 required: 'Email is required',
                                                 pattern: {

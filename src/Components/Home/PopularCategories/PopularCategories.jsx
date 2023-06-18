@@ -25,7 +25,7 @@ const PopularCategories = () => {
             <section className='space-y-7'>
                 <header className='flex justify-between items-center'>
                     {/* Title */}
-                    <h1 className='pb-0 lg:text-3xl md:text-2xl text-xl font-semibold capitalize'>
+                    <h1 className='pb-0 md:text-2xl text-xl font-semibold capitalize'>
                         Popular Categories
                     </h1>
                     {/* See all Categories Btn */}

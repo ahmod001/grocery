@@ -8,7 +8,7 @@ const CartItems = () => {
     const [cartItems, setCartItems] = cartItemsState;
 
     return (
-        <div className='col xl:col-span-2 lg:col-span-1 md:col-span-8 lg:space-y-7 space-y-3.5'>
+        <div className='lg:space-y-10 space-y-5'>
             {/* Title */}
             <h2 className='lg:text-2xl sm:text-xl text-lg sm:font-semibold font-bold '>
                 Selected Items
@@ -21,7 +21,7 @@ const CartItems = () => {
                         item={cartItem}
                         key={cartItem.id} />
                 ))}
-                
+
             </div>
         </div>
     );

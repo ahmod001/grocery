@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { groceryContext } from '../Layout/Layout';
 import { ShoppingCartRounded } from '@mui/icons-material';
+import SuccessAlert from '../SuccessAlert/SuccessAlert';
 
 // This function will add Go_back feature on the Navbar
 function ScrollTop(props) {
@@ -161,117 +162,130 @@ const Navbar = (props) => {
     window.addEventListener('scroll', () => {
         setIsNavbarElevated(window.scrollY > 0)
     })
+    React.useEffect(() => {
+        setIsNavbarElevated(window.pageYOffset > 0)
+    }, [])
 
     const navigate = useNavigate();
     const { userLoggedInState } = React.useContext(groceryContext);
     const [isUserLoggedIn, setIsUserLoggedIn] = userLoggedInState;
 
+    const [openAlert, setOpenAlert] = React.useState(false);
+
     // Log out button handler 
     const handleLogOut = () => {
         setIsUserLoggedIn(false)
+        setOpenAlert(!openAlert)
         sessionStorage.setItem('userLoggedIn', JSON.stringify(false))
     }
 
     return (
-        <nav className='fixed z-50'>
-            <CssBaseline />
-            <ElevationScroll {...props}>
-                <AppBar sx={{ bgcolor: isNavBarElevated ? 'white' : 'transparent', transition: 'all 150ms ease-in-out' }}>
-                    <Toolbar>
-                        <Container
-                            disableGutters={isLargeScreen}
-                            sx={{ display: 'flex', px: isLargeScreen ? 0.5 : 0 }} >
+        <>
+            <SuccessAlert
+                state={[openAlert, setOpenAlert]}
+                massage={'Log out successfully'} />
 
-                            {/* Open Drawer Btn */}
-                            {isSemiMediumScreen &&
-                                <IconButton
-                                    color="black"
-                                    aria-label="open drawer"
+            <nav className='fixed z-50'>
+                <CssBaseline />
+                <ElevationScroll {...props}>
+                    <AppBar sx={{ bgcolor: isNavBarElevated ? 'white' : 'transparent', transition: 'all 150ms ease-in-out' }}>
+                        <Toolbar>
+                            <Container
+                                disableGutters={isLargeScreen}
+                                sx={{ display: 'flex', px: isLargeScreen ? 0.5 : 0 }} >
 
-                                    onClick={() => setIsOpenDrawer(!isOpenDrawer)}
-                                    edge="start"
-                                    sx={{ mr: 1 }}
-                                >
-                                    <MenuIcon fontSize='inherit' />
-                                </IconButton>}
+                                {/* Open Drawer Btn */}
+                                {isSemiMediumScreen &&
+                                    <IconButton
+                                        color="black"
+                                        aria-label="open drawer"
 
-                            <div className='flex w-full justify-between items-center'>
-                                {/* Brand_icon */}
-                                <Link to={'/home'}>
-                                    <img className='sm:max-h-6 max-h-5 my-auto cursor-pointer'
-                                        src={logo_black}
-                                        alt="grocery" />
-                                </Link>
+                                        onClick={() => setIsOpenDrawer(!isOpenDrawer)}
+                                        edge="start"
+                                        sx={{ mr: 1 }}
+                                    >
+                                        <MenuIcon fontSize='inherit' />
+                                    </IconButton>}
 
-                                <div className='flex items-center space-x-8'>
-                                    {/* Links */}
-                                    {isSemiMediumScreen ?
-                                        <Drawer
-                                            anchor={'left'}
-                                            open={isOpenDrawer}
-                                            onClose={() => setIsOpenDrawer(!isOpenDrawer)}
-                                        >
-                                            <Links
+                                <div className='flex w-full justify-between items-center'>
+                                    {/* Brand_icon */}
+                                    <Link to={'/home'}>
+                                        <img className='sm:max-h-6 max-h-5 my-auto cursor-pointer'
+                                            src={logo_black}
+                                            alt="grocery" />
+                                    </Link>
+
+                                    <div className='flex items-center space-x-8'>
+                                        {/* Links */}
+                                        {isSemiMediumScreen ?
+                                            <Drawer
+                                                anchor={'left'}
+                                                open={isOpenDrawer}
+                                                onClose={() => setIsOpenDrawer(!isOpenDrawer)}
+                                            >
+                                                <Links
+                                                    setIsOpenDrawer={setIsOpenDrawer}
+                                                    isOpenDrawer={isOpenDrawer}
+                                                    drawer={true} />
+                                            </Drawer>
+
+                                            : <Links
                                                 setIsOpenDrawer={setIsOpenDrawer}
-                                                isOpenDrawer={isOpenDrawer}
-                                                drawer={true} />
-                                        </Drawer>
+                                                isOpenDrawer={isOpenDrawer} />
+                                        }
+                                        <div className='sm:space-x-8 space-x-5'>
+                                            {/* Go to cart btn */}
+                                            <Tooltip title='Cart'>
+                                                <span>
+                                                    <IconButton
+                                                        onClick={() => navigate('/cart')}
+                                                        // disabled
+                                                        sx={{ textTransform: 'capitalize' }}
+                                                        color='warning'>
+                                                        <ShoppingCartRounded fontSize='inherit' />
+                                                    </IconButton>
+                                                </span>
+                                            </Tooltip>
 
-                                        : <Links
-                                            setIsOpenDrawer={setIsOpenDrawer}
-                                            isOpenDrawer={isOpenDrawer} />
-                                    }
-                                    {/* Go to cart btn */}
-                                    <Tooltip title='Cart'>
-                                        <span>
-                                            <IconButton
-                                                onClick={() => navigate('/cart')}
-                                                // disabled
-                                                sx={{ textTransform: 'capitalize' }}
-                                                color='warning'>
-                                                <ShoppingCartRounded fontSize='inherit' />
-                                            </IconButton>
-                                        </span>
-                                    </Tooltip>
+                                            {// Log in Btn
+                                                !isUserLoggedIn ?
+                                                    <Button onClick={() => navigate('/login')}
+                                                        size={isExtraSmallScreen ? 'small' : 'medium'}
+                                                        sx={{ textTransform: 'capitalize' }}
+                                                        color='success'
+                                                        variant='contained'>
+                                                        Log in
+                                                    </Button>
 
-                                    {// Log in Btn
-                                        !isUserLoggedIn ?
-                                            <Button onClick={() => navigate('/login')}
-                                                size={isExtraSmallScreen ? 'small' : 'medium'}
-                                                sx={{ textTransform: 'capitalize' }}
-                                                color='success'
-                                                variant='contained'>
-                                                Log in
-                                            </Button>
-
-                                            // Log out Btn
-                                            : <Button
-                                                size={isExtraSmallScreen ? 'small' : 'medium'}
-                                                onClick={handleLogOut}
-                                                sx={{ textTransform: 'capitalize' }}
-                                                color='success'
-                                                variant='contained'>
-                                                Log out
-                                            </Button>
-                                    }
+                                                    // Log out Btn
+                                                    : <Button
+                                                        size={isExtraSmallScreen ? 'small' : 'medium'}
+                                                        onClick={handleLogOut}
+                                                        sx={{ textTransform: 'capitalize' }}
+                                                        color='success'
+                                                        variant='contained'>
+                                                        Log out
+                                                    </Button>}
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </Container>
-                    </Toolbar>
-                </AppBar>
-            </ElevationScroll>
-            <Toolbar id="back-to-top-anchor" />
+                            </Container>
+                        </Toolbar>
+                    </AppBar>
+                </ElevationScroll>
+                <Toolbar id="back-to-top-anchor" />
 
-            {/* Go_Back on the top btn */}
-            <ScrollTop {...props}>
-                <Fab
-                    color='warning'
-                    size="small"
-                    aria-label="scroll back to top">
-                    <KeyboardArrowUpIcon />
-                </Fab>
-            </ScrollTop>
-        </nav>
+                {/* Go_Back on the top btn */}
+                <ScrollTop {...props}>
+                    <Fab
+                        color='warning'
+                        size="small"
+                        aria-label="scroll back to top">
+                        <KeyboardArrowUpIcon />
+                    </Fab>
+                </ScrollTop>
+            </nav>
+        </>
     )
 };
 

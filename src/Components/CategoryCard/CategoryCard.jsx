@@ -10,12 +10,12 @@ const CategoryCard = ({ category, shadow }) => {
         <CardActionArea
             onClick={() => navigate(`/categories/${category.name.toLowerCase()}`)}
             sx={{ maxWidth: '19rem', mx: 'auto', boxShadow: shadow ? '0 1px 2px 0 rgb(0 0 0 / 0.05)' : 'none' }}>
-            <div className='rounded-lg w-full cursor-pointer xl:h-[13rem] sm:h-[12.9rem] h-[12rem] flex items-center shadow-sm justify-center' style={{ backgroundColor: category.bgColor }}>
+            <div className='rounded-lg w-full cursor-pointer xl:h-[11rem]  h-[10rem] flex items-center shadow-sm justify-center' style={{ backgroundColor: category.bgColor }}>
                 <div className='sm:space-y-2 space-y-3.5'>
                     {/* Img */}
                     <Fade in={true}>
                         <img
-                            className='xl:h-28 md:h-24 sm:h-28 h-20 m-auto'
+                            className='xl:h-[5rem]  h-[4.5rem] m-auto'
                             src={category.img}
                             loading='lazy'
                             alt={category.name} />
