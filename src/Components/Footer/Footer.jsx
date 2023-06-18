@@ -99,8 +99,7 @@ const Footer = () => {
             <div>
                 <hr className='border-gray-600' />
                 <div className='text-center flex items-center h-12'>
-                    <span className='text-xs  w-full block text-gray-300 tracking-wider'>© 2023 Developed by <a className='hover:underline' href="https://github.com/ahmod001" target="_blank" rel="noopener noreferrer"> Hasan </a>
-                        | Designed by <a className='hover:underline' href="http://" target="_blank" rel="noopener noreferrer">DesignAxen</a></span>
+                    <span className='text-xs  w-full block text-gray-300 tracking-wider'>© 2023 Developed By <a className='hover:underline' href="https://github.com/ahmod001" target="_blank" rel="noopener noreferrer"> Hasan </a></span>
                 </div>
             </div>
         </footer>

@@ -10,12 +10,6 @@ const EnjoyOurFreshGroceryItems = () => {
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
-    // Offline Mode
-    useMemo(() => {
-        setIsLoading(false)
-        setItems(products[selectedCategory].items.slice(0, 3))
-    }, [selectedCategory])
-
     // MediaQuery
     const isExtraSmallScreen = useMediaQuery('(max-width: 640px)');
 
