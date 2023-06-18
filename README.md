@@ -34,8 +34,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgements
 
-- [React](https://reactjs.org/)
-- [Material UI](https://mui.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
+Special thanks to our talented web designer, [DesignAxen]([https://designerwebsite.com](https://www.behance.net/DesignAxen?fbclid=IwAR3qIu-zVNheaFgqoT686xVv2cQbZijEYDb8wTBKSbaeSISL07UIWI3SR9U)), for their invaluable contributions to the visual aesthetics of the Grocery App.
+
 
 ##### ©2023 Developed by Ahmod Hasan
