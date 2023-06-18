@@ -34,7 +34,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgements
 
-Special thanks to our talented web designer, [DesignAxen]([https://designerwebsite.com](https://www.behance.net/DesignAxen?fbclid=IwAR3qIu-zVNheaFgqoT686xVv2cQbZijEYDb8wTBKSbaeSISL07UIWI3SR9U)), for their invaluable contributions to the visual aesthetics of the Grocery App.
+Special thanks to the web designer, [DesignAxen](https://www.behance.net/DesignAxen?fbclid=IwAR3qIu-zVNheaFgqoT686xVv2cQbZijEYDb8wTBKSbaeSISL07UIWI3SR9U), for his invaluable contributions to the visual aesthetics of the Grocery App.
+
 
 
 ##### ©2023 Developed by Ahmod Hasan
