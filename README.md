@@ -28,10 +28,6 @@ To get started with the Grocery Application, follow these steps:
 - JSON and asynchronous JSON data
 - APIs for retrieving data
 
-## Contributing
-
-Contributions to the Grocery Application are welcome! If you find any issues or have suggestions for improvements, please feel free to open a new issue or submit a pull request.
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
