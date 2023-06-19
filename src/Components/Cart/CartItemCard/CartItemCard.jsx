@@ -27,7 +27,7 @@ const CartItemCard = ({ item }) => {
         <>
             <PopUpDialog
                 open={openDialog }
-                handleOk={handleRemoveItem}
+                handleRemove={handleRemoveItem}
                 handleCancel={()=> setOpenDialog(!openDialog)}
                 message={'Want to remove this item'} />
 

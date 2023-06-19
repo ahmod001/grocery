@@ -10,8 +10,8 @@ const PopUpDialog = ({ open, message, handleRemove, handleCancel, handleOk, plac
             TransitionComponent={transition}
             open={open}
             onClose={handleCancel}>
-            <div className={`lg:w-96 ${placeOrder ? 'sm:h-56 h-[13rem]' : 'lg:h-48 h-[9.7rem] sm:h-44'} sm:w-[21rem]  w-[17.5rem] items-center flex justify-center text-center`}>
-                <div className={!placeOrder ? 'sm:space-y-5 space-y-9' : 'md:space-y-9 space-y-7'}>
+            <div className={`lg:w-96 ${placeOrder ? 'sm:h-56 h-[12.5rem]' : 'h-[9rem] sm:h-[11.5rem]'} sm:w-[20rem] w-[17.5rem] items-center flex justify-center text-center`}>
+                <div className={!placeOrder ? 'sm:space-y-11 space-y-8' : 'md:space-y-9 space-y-7'}>
                     <div className='space-y-5'>
                         {placeOrder &&
                             // PlaceOrder Successful Animation
@@ -24,7 +24,7 @@ const PopUpDialog = ({ open, message, handleRemove, handleCancel, handleOk, plac
                             </div>
                         }
                         {/* Massage */}
-                        <h3 className={`${!placeOrder ? 'sm:text-lg' : 'text-sm'} capitalize font-semibold text-gray-700`}>
+                        <h3 className={`${!placeOrder ? 'sm:text-lg' : 'text-base'} capitalize font-semibold text-gray-700`}>
                             {message}
                         </h3>
                     </div>
