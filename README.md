@@ -1,3 +1,5 @@
+![grocery_mockup](https://github.com/ahmod001/grocery/assets/121039395/f8ff25cb-4710-49f3-9ce8-712ec325200e)
+
 # Grocery -Landing page application
 
 Welcome to the Grocery Application! This is a user-friendly and easy-to-use landing page built with React, Material UI, and Tailwind CSS.
