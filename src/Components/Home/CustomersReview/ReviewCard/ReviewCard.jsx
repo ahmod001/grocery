@@ -1,6 +1,5 @@
 import { Avatar, Skeleton } from '@mui/material';
 import React from 'react';
-import truck from '../../../../assets/icons/service_icons/truck.png';
 import { Star } from '@mui/icons-material';
 
 const ReviewCard = ({ user }) => {

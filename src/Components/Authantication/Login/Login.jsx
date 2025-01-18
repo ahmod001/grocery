@@ -1,5 +1,5 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { Alert, Button, Collapse, Container, Fade, IconButton, InputAdornment, TextField } from '@mui/material';
+import { Button, Container, Fade, IconButton, InputAdornment, TextField } from '@mui/material';
 import { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import animation from '../../../assets/animations/loginAnimation.gif';
