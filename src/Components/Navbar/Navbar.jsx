@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Fade from "@mui/material/Fade";
-import logo_black from "../../assets/logo_black.png";
+import logo_black from "../../assets/Logo_black.png";
 import {
   Button,
   Container,
